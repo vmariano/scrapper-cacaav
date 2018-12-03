@@ -4,7 +4,7 @@ const writer = require('./writerHelper.js');
 
 // Test
 const baseUrl = 'http://127.0.0.1:8080/';
-const pageTotal = 10;
+const pageTotal = 270;
 
 //Target
 // const baseUrl = 'http://www.cacaav.com.ar/matriculados/listado';
