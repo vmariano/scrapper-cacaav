@@ -1,0 +1,20 @@
+{
+  "name": "cacaav-scrapper",
+  "version": "1.0.0",
+  "description": "A scraper to downlad data of installers register on www.cacaav.com.ar",
+  "main": "./index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "scrapper",
+    "aa",
+    "instaladores"
+  ],
+  "author": "vmariano",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.88.0"
+  }
+}
