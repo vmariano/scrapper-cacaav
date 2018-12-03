@@ -21,14 +21,20 @@ function processData(data) {
     return $data.text().trim();
 }
 
+function extractLocation(adress) {
+    var adressArray = adress.split(',');
+    return adressArray[adressArray.length-1].trim();
+}
+
 function processCard(card) {
   const $card = cheerio.load(card);
-  var installer = { name:'', phone:'',  adress:''};
-  var $data = $card('.Tarjeta-dato');
+  var installer = { name:'', phone:'',  adress:'', location:''};
+  var $installerData = $card('.Tarjeta-dato');
 
   installer.name = $card('.Tarjeta-titulo').text();
-  installer.adress = processData($data[0]);
-  installer.phone = processData($data[1]);
+  installer.adress = processData($installerData[0]);
+  installer.location = extractLocation(processData($installerData[0]));
+  installer.phone = processData($installerData[1]);
   console.log(installer)
 }
 
