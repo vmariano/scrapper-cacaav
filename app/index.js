@@ -3,10 +3,12 @@ const cheerio = require('cheerio');
 const writer = require('./writerHelper.js');
 
 // Test
-const url = 'http://127.0.0.1:8080/';
+const baseUrl = 'http://127.0.0.1:8080/';
+const pageTotal = 10;
 
 //Target
-// const url = 'http://www.cacaav.com.ar/matriculados/listado';
+// const baseUrl = 'http://www.cacaav.com.ar/matriculados/listado';
+// pageTotal = 10;
 
 function processData(data) {
     const $data = cheerio.load(data);
@@ -30,7 +32,7 @@ function processCard(card) {
   return installer
 }
 
-function scrapData() {
+function requestTo(url) {
     request(url, function(err, resp, html) {
         if (!err){
             const $ = cheerio.load(html);
@@ -42,6 +44,17 @@ function scrapData() {
             writer(scrapedData);
         }
     });
+}
+
+function scrapData() {
+    var url = baseUrl;
+    for (var i=1; i<pageTotal;i++) {
+        if (i !== 1) {
+            // Skip 1st.
+            url = baseUrl +  '?page=' + i;
+        }
+        requestTo(url)
+    }
 }
 
 scrapData();
