@@ -7,8 +7,7 @@ const baseUrl = 'http://127.0.0.1:8080/';
 const pageTotal = 270;
 
 //Target
-// const baseUrl = 'http://www.cacaav.com.ar/matriculados/listado';
-// pageTotal = 10;
+//const baseUrl = 'http://www.cacaav.com.ar/matriculados/listado';
 
 function processData(data) {
     const $data = cheerio.load(data);
@@ -53,6 +52,7 @@ function scrapData() {
             // Skip 1st.
             url = baseUrl +  '?page=' + i;
         }
+        console.log('Processing:' + i +'of' + pageTotal);
         requestTo(url)
     }
 }
