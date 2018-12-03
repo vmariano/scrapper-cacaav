@@ -8,18 +8,6 @@ const url = 'http://127.0.0.1:8080/';
 //Target
 // const url = 'http://www.cacaav.com.ar/matriculados/listado';
 
-request(url, function(err, resp, html) {
-        if (!err){
-          const $ = cheerio.load(html);
-          var scrapedData = '';
-          $('.Tarjeta').each(function (index, value) {
-            scrapedData += JSON.stringify(processCard(value)) + ',\n';
-          });
-          //console.log(scrapedData);
-          writer(scrapedData);
-      }
-});
-
 function processData(data) {
     const $data = cheerio.load(data);
     return $data.text().trim();
@@ -42,3 +30,18 @@ function processCard(card) {
   return installer
 }
 
+function scrapData() {
+    request(url, function(err, resp, html) {
+        if (!err){
+            const $ = cheerio.load(html);
+            var scrapedData = '';
+            $('.Tarjeta').each(function (index, value) {
+                scrapedData += JSON.stringify(processCard(value)) + ',\n';
+            });
+            //console.log(scrapedData);
+            writer(scrapedData);
+        }
+    });
+}
+
+scrapData();
