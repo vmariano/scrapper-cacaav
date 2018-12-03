@@ -7,7 +7,6 @@ const url = 'http://127.0.0.1:8080/';
 //Target
 // const url = 'http://www.cacaav.com.ar/matriculados/listado';
 
-
 request(url, function(err, resp, html) {
         if (!err){
           const $ = cheerio.load(html);
@@ -19,14 +18,17 @@ request(url, function(err, resp, html) {
 
 function processData(data) {
     const $data = cheerio.load(data);
-    return $data.text();
+    return $data.text().trim();
 }
 
 function processCard(card) {
   const $card = cheerio.load(card);
-  console.log($card('.Tarjeta-titulo').html());
-  $card('.Tarjeta-dato').each(function (index, value) {
-      console.log(processData(value));
-  })
+  var installer = { name:'', phone:'',  adress:''};
+  var $data = $card('.Tarjeta-dato');
+
+  installer.name = $card('.Tarjeta-titulo').text();
+  installer.adress = processData($data[0]);
+  installer.phone = processData($data[1]);
+  console.log(installer)
 }
 
