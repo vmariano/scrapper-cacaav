@@ -45,6 +45,7 @@ function requestTo(url) {
     });
 }
 
+//TODO: add async/await
 function scrapData() {
     var url = baseUrl;
     for (var i=1; i<pageTotal;i++) {
