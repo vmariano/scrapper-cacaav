@@ -1,5 +1,6 @@
 const request = require('request');
 const cheerio = require('cheerio');
+const writer = require('./writerHelper.js');
 
 // Test
 const url = 'http://127.0.0.1:8080/';
@@ -10,9 +11,12 @@ const url = 'http://127.0.0.1:8080/';
 request(url, function(err, resp, html) {
         if (!err){
           const $ = cheerio.load(html);
+          var scrapedData = '';
           $('.Tarjeta').each(function (index, value) {
-            processCard(value)
+            scrapedData += JSON.stringify(processCard(value)) + ',\n';
           });
+          //console.log(scrapedData);
+          writer(scrapedData);
       }
 });
 
@@ -35,6 +39,6 @@ function processCard(card) {
   installer.adress = processData($installerData[0]);
   installer.location = extractLocation(processData($installerData[0]));
   installer.phone = processData($installerData[1]);
-  console.log(installer)
+  return installer
 }
 
