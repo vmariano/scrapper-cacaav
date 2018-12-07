@@ -14,18 +14,18 @@ function processData(data) {
     return $data.text().trim();
 }
 
-function extractLocation(adress) {
-    var adressArray = adress.split(',');
-    return adressArray[adressArray.length-1].trim();
+function extractLocation(address) {
+    var addressArray = address.split(',');
+    return addressArray[addressArray.length-1].trim();
 }
 
 function processCard(card) {
   const $card = cheerio.load(card);
-  var installer = { name:'', phone:'',  adress:'', location:''};
+  var installer = { name:'', phone:'',  address:'', location:''};
   var $installerData = $card('.Tarjeta-dato');
 
   installer.name = $card('.Tarjeta-titulo').text();
-  installer.adress = processData($installerData[0]);
+  installer.address = processData($installerData[0]);
   installer.location = extractLocation(processData($installerData[0]));
   installer.phone = processData($installerData[1]);
   return installer

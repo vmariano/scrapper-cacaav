@@ -22,6 +22,4 @@ function appendFile(target, data) {
     });
 }
 
-
-
 module.exports = saveData;
